@@ -50,9 +50,10 @@ public class MainActivity extends AppCompatActivity {
 	 * This method is called when the + (plus) button is clicked.
 	 */
 	public void increment(View view) {
-		numberOfCoffees = numberOfCoffees + 1;
-		displayQuantity(numberOfCoffees);
-		
+		if (numberOfCoffees < 10) {
+			numberOfCoffees = numberOfCoffees + 1;
+			displayQuantity(numberOfCoffees);
+		}
 	}
 	/**
 	 * This method is called when the - (minus) button is clicked.

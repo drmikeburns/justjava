@@ -3,6 +3,7 @@ package com.example.android.justjava;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import java.text.NumberFormat;
 
@@ -30,9 +31,18 @@ public class MainActivity extends AppCompatActivity {
 	
 	/**
 	 * This method is called when the order button is clicked.
-	 */
+	 *//*chkwhipped.isChecked()*/
 	public void submitOrder(View view) {
-		String priceMessage = "Name: Micheal Burns\nQuantity: " + numberOfCoffees + "\nTotal: $" + calculatePrice(numberOfCoffees, price) + ".00.\nThank you!";
+		CheckBox chkwhipped = findViewById(R.id.chkWhipped);
+		CheckBox chkchocolate = findViewById(R.id.chkChocolate);
+		TextView userName = findViewById(R.id.txtName);
+		String priceMessage = "Name: "+ userName.getText() +
+				                      "\nAdd whipped cream? " + chkwhipped.isChecked() +
+				                      "\nAdd chocolate? " + chkchocolate.isChecked() +
+				                      "\nQuantity: " + numberOfCoffees +
+				                      "\nTotal: $" +
+				                      calculatePrice(numberOfCoffees, price) +
+				                      ".00.\nThank you!";
 		TextView order_summary_text_view = (TextView) findViewById(R.id.order_summary_text_view);
 		order_summary_text_view.setText(priceMessage);
 	}
@@ -61,16 +71,15 @@ public class MainActivity extends AppCompatActivity {
 		quantityTextView.setText(String.valueOf(number));
 	}
 	
-	
-	/**
-	 * This method displays the given text on the screen.
-	 */
-	private void displayMessage(String message) {
-		TextView priceTextView = findViewById(R.id.order_summary_text_view);
-		priceTextView.setText(message);
-	}
-	
 	private int calculatePrice(int quantity, int price) {
+		CheckBox chkwhipped = findViewById(R.id.chkWhipped);
+		CheckBox chkchocolate = findViewById(R.id.chkChocolate);
+		if (chkwhipped.isChecked()) {
+			price = price + 1;
+		}
+		if (chkchocolate.isChecked()) {
+			price = price + 2;
+		}
 		return quantity * price;
 	}
 

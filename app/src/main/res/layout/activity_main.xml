@@ -8,6 +8,36 @@
 	tools:context=".MainActivity">
 
 	<TextView
+		android:id="@+id/lblToppings"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:fontFamily="sans-serif"
+		android:layout_marginTop="16dp"
+		android:layout_marginLeft="16dp"
+		android:text="@string/toppings"
+		android:textAllCaps="true"
+		android:textColor="@android:color/black"
+		android:textSize="24sp" />
+
+	<CheckBox
+		android:id="@+id/chkWhipped"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/lblToppings"
+		android:layout_marginTop="16dp"
+		android:layout_marginLeft="16dp"
+		android:text="@string/whipped_cream" />
+
+	<CheckBox
+		android:id="@+id/chkChocolate"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/chkWhipped"
+		android:layout_marginTop="16dp"
+		android:layout_marginLeft="16dp"
+		android:text="@string/chocolate" />
+
+	<TextView
 		android:id="@+id/lblQuantity"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
@@ -15,6 +45,7 @@
 		android:padding="16dp"
 		android:text="@string/quantity"
 		android:textAllCaps="true"
+		android:layout_below="@+id/chkOther"
 		android:textColor="@android:color/black"
 		android:textSize="24sp" />
 
@@ -59,13 +90,14 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_below="@id/quantityLayout"
-		android:layout_marginStart="16dp"
 		android:layout_marginTop="16dp"
+		android:layout_marginLeft="16dp"
 		android:fontFamily="sans-serif"
 		android:text="@string/price"
 		android:textAllCaps="true"
 		android:textColor="@android:color/black"
-		android:textSize="24sp" />
+		android:textSize="24sp"
+		android:layout_marginStart="16dp" />
 
 	<TextView
 		android:id="@+id/order_summary_text_view"
@@ -89,5 +121,7 @@
 		android:textAllCaps="true"
 		android:textColor="@android:color/black"
 		android:textSize="24sp" />
+
+
 
 </RelativeLayout>

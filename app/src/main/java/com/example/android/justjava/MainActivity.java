@@ -1,5 +1,7 @@
 package com.example.android.justjava;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -45,6 +47,15 @@ public class MainActivity extends AppCompatActivity {
 				                      ".00.\nThank you!";
 		TextView order_summary_text_view = (TextView) findViewById(R.id.order_summary_text_view);
 		order_summary_text_view.setText(priceMessage);
+		Intent sendEmail = new Intent(Intent.ACTION_SENDTO);
+		sendEmail.setType("*/*");
+		sendEmail.setData(Uri.parse("mailto:knmb323@gmail.com"));
+		sendEmail.putExtra(Intent.EXTRA_EMAIL,"knmb323@gmail.com");
+		sendEmail.putExtra(Intent.EXTRA_SUBJECT, "New Order");
+		sendEmail.putExtra(Intent.EXTRA_TEXT,priceMessage);
+		if (sendEmail.resolveActivity(getPackageManager()) != null) {
+			startActivity(sendEmail);
+		}
 	}
 	/**
 	 * This method is called when the + (plus) button is clicked.

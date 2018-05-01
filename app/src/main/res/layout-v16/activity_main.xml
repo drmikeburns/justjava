@@ -131,13 +131,29 @@
 		android:textSize="18sp" />
 
 	<Button
+		android:id="@+id/summarizeOrder"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_below="@id/order_summary_text_view"
 		android:fontFamily="sans-serif"
-		android:onClick="submitOrder"
+		android:onClick="summarizeOrder"
 		android:padding="24dp"
-		android:text="@string/order"
+		android:text="Total"
+		android:textAllCaps="true"
+		android:textColor="@android:color/black"
+		android:textSize="24sp" />
+
+	<Button
+		android:id="@+id/sendOrder"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/order_summary_text_view"
+		android:layout_toRightOf="@id/summarizeOrder"
+		android:fontFamily="sans-serif"
+		android:onClick="sendOrder"
+		android:padding="24dp"
+		android:text="Send"
+		android:enabled="false"
 		android:textAllCaps="true"
 		android:textColor="@android:color/black"
 		android:textSize="24sp" />

@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import java.text.NumberFormat;
@@ -24,21 +25,23 @@ public class MainActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		/**
+		/*
 		 * set quantity_text_view to initialized value onCreate
 		 */
 		TextView quantity_text_view = (TextView) findViewById(R.id.quantity_text_view);
 		quantity_text_view.setText(String.valueOf(numberOfCoffees));
 	}
 	
-	/**
-	 * This method is called when the order button is clicked.
-	 *//*chkwhipped.isChecked()*/
-	public void submitOrder(View view) {
+	/*
+	Create Order Summary message
+	 */
+	public void summarizeOrder (View view){
 		CheckBox chkwhipped = findViewById(R.id.chkWhipped);
 		CheckBox chkchocolate = findViewById(R.id.chkChocolate);
 		TextView userName = findViewById(R.id.txtName);
-		String priceMessage = "Name: "+ userName.getText() +
+		Button sendButton = findViewById(R.id.sendOrder);
+		sendButton.setEnabled(true);
+		String orderSummary = "Name: "+ userName.getText() +
 				                      "\nAdd whipped cream? " + chkwhipped.isChecked() +
 				                      "\nAdd chocolate? " + chkchocolate.isChecked() +
 				                      "\nQuantity: " + numberOfCoffees +
@@ -46,18 +49,35 @@ public class MainActivity extends AppCompatActivity {
 				                      calculatePrice(numberOfCoffees, price) +
 				                      ".00.\nThank you!";
 		TextView order_summary_text_view = (TextView) findViewById(R.id.order_summary_text_view);
-		order_summary_text_view.setText(priceMessage);
+		order_summary_text_view.setText(orderSummary );
+	}
+	/*
+	Send order via email
+	 */
+	public void sendOrder (View view) {
+		CheckBox chkwhipped = findViewById(R.id.chkWhipped);
+		CheckBox chkchocolate = findViewById(R.id.chkChocolate);
+		TextView userName = findViewById(R.id.txtName);
+		String orderSummary = "Name: "+ userName.getText() +
+				                      "\nAdd whipped cream? " + chkwhipped.isChecked() +
+				                      "\nAdd chocolate? " + chkchocolate.isChecked() +
+				                      "\nQuantity: " + numberOfCoffees +
+				                      "\nTotal: $" +
+				                      calculatePrice(numberOfCoffees, price) +
+				                      ".00.\nThank you!";
+		TextView order_summary_text_view = (TextView) findViewById(R.id.order_summary_text_view);
+		order_summary_text_view.setText(orderSummary );
 		Intent sendEmail = new Intent(Intent.ACTION_SENDTO);
 		sendEmail.setType("*/*");
 		sendEmail.setData(Uri.parse("mailto:knmb323@gmail.com"));
 		sendEmail.putExtra(Intent.EXTRA_EMAIL,"knmb323@gmail.com");
 		sendEmail.putExtra(Intent.EXTRA_SUBJECT, "New Order");
-		sendEmail.putExtra(Intent.EXTRA_TEXT,priceMessage);
+		sendEmail.putExtra(Intent.EXTRA_TEXT,orderSummary);
 		if (sendEmail.resolveActivity(getPackageManager()) != null) {
 			startActivity(sendEmail);
 		}
 	}
-	/**
+	/*
 	 * This method is called when the + (plus) button is clicked.
 	 */
 	public void increment(View view) {
